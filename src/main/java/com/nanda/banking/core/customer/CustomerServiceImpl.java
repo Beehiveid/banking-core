@@ -33,4 +33,12 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setId(UUID.randomUUID());
         customerRepository.save(customer);
     }
+
+    void save(List<Customer> customer) {
+        customer.forEach(
+                item -> item.setId(UUID.randomUUID())
+        );
+
+        customerRepository.saveAll(customer);
+    }
 }

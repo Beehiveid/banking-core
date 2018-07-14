@@ -23,7 +23,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public void create(@RequestBody Customer customer){
+    public void create(@RequestBody List<Customer> customer){
         customerService.save(customer);
     }
 
