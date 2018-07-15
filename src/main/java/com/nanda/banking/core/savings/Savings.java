@@ -1,8 +1,9 @@
 package com.nanda.banking.core.savings;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.nanda.banking.core.common.Common;
+import com.nanda.banking.core.customer.Customer;
+
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -15,6 +16,18 @@ public class Savings {
 
     private double amount;
     private boolean active;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public UUID getId() {
         return id;
@@ -50,5 +63,13 @@ public class Savings {
 
     public Savings() {
 
+    }
+
+    public Savings(Customer customer) {
+        this.customer = customer;
+        this.id = UUID.randomUUID();
+        this.active = true;
+        this.amount = 0;
+        this.identifier = Common.getGeneratedLong();
     }
 }
