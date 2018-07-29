@@ -17,6 +17,15 @@ public class Channel {
     private String name;
     private String description;
     private boolean secure;
+    private boolean autoAssign;
+
+    public boolean isAutoAssign() {
+        return autoAssign;
+    }
+
+    public void setAutoAssign(boolean autoAssign) {
+        this.autoAssign = autoAssign;
+    }
 
     public int getId() {
         return id;
