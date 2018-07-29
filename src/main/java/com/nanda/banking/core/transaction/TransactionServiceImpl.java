@@ -1,7 +1,5 @@
 package com.nanda.banking.core.transaction;
 
-import com.nanda.banking.core.channelLog.ChannelLog;
-import com.nanda.banking.core.channelLog.ChannelLogServiceImpl;
 import com.nanda.banking.core.savings.Savings;
 import com.nanda.banking.core.savings.SavingsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +13,6 @@ import java.util.UUID;
 public class TransactionServiceImpl implements TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
-
-    @Autowired
-    private ChannelLogServiceImpl channelLogService;
 
     @Autowired
     private SavingsServiceImpl savingsService;
