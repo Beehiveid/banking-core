@@ -11,12 +11,20 @@ import javax.validation.constraints.Size;
 public class Channel {
     @Id
     @Column(length = 3)
-    @Size(min = 3)
     private int id;
 
     private String name;
     private String description;
     private boolean secure;
+    private boolean autoAssign;
+
+    public boolean isAutoAssign() {
+        return autoAssign;
+    }
+
+    public void setAutoAssign(boolean autoAssign) {
+        this.autoAssign = autoAssign;
+    }
 
     public int getId() {
         return id;
