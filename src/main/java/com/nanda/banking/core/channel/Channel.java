@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 public class Channel {
     @Id
     @Column(length = 3)
-    @Size(min = 3)
     private int id;
 
     private String name;

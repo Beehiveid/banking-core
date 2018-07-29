@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("channel")
+@RequestMapping("/channel")
 public class ChannelController {
     @Autowired
     private ChannelServiceImpl channelService;
@@ -22,7 +22,7 @@ public class ChannelController {
     }
 
     @PostMapping
-    public void create(List<Channel> channels){
+    public void create(@RequestBody List<Channel> channels){
         channelService.save(channels);
     }
 }
