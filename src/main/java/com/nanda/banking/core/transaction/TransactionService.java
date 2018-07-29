@@ -7,4 +7,6 @@ public interface TransactionService {
     List<Transaction> findAll();
     Transaction findById(UUID id);
     void save(Transaction transaction);
+
+    void updateAmount(Transaction submitted);
 }

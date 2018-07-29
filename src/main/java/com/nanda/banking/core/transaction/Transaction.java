@@ -70,6 +70,7 @@ public class Transaction {
     }
 
     public Transaction() {
-
+        this.setId(UUID.randomUUID());
+        this.setSystemDate(new Date());
     }
 }

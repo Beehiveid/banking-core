@@ -27,7 +27,7 @@ public class ChannelLog {
     @JoinColumn(name = "savings_id")
     private Savings savings;
 
-    Savings getSavings() {
+    public Savings getSavings() {
         return savings;
     }
 
