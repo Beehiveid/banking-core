@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import java.util.UUID;
 
 @Entity
 @Table(name = "m_channel")
@@ -17,6 +18,10 @@ public class Channel {
     private String description;
     private boolean secure;
     private boolean autoAssign;
+
+    public Channel(int id) {
+        this.setId(id);
+    }
 
     public boolean isAutoAssign() {
         return autoAssign;
@@ -58,7 +63,7 @@ public class Channel {
         this.secure = secure;
     }
 
-    public Channel() {
+    Channel() {
 
     }
 }

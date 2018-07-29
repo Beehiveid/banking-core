@@ -7,4 +7,6 @@ public interface ChannelService {
     Channel findById(int id);
     void save(Channel channel);
     void save(List<Channel> channels);
+
+    List<Channel> findAutoAssignChannel(boolean b);
 }

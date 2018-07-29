@@ -35,4 +35,9 @@ public class ChannelServiceImpl implements ChannelService {
     public void save(List<Channel> channels) {
         channelRepository.saveAll(channels);
     }
+
+    @Override
+    public List<Channel> findAutoAssignChannel(boolean b) {
+        return channelRepository.findByAutoAssign(b);
+    }
 }

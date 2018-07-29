@@ -1,5 +1,7 @@
 package com.nanda.banking.core.channelLog;
 
+import com.nanda.banking.core.channel.Channel;
+import com.nanda.banking.core.savings.Savings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +26,13 @@ public class ChannelLogController {
 
     @PostMapping
     public void create(@RequestBody List<ChannelLog> channelLogs){
-        channelLogService.save(channelLogs);
+        channelLogs.forEach(
+                item->{
+                    Savings savings = new Savings(item.getSavings().getId());
+                    Channel channel = new Channel(item.getChannel().getId());
+                    ChannelLog channelLog = new ChannelLog(savings, channel);
+                    channelLogService.save(channelLog);
+                }
+        );
     }
 }

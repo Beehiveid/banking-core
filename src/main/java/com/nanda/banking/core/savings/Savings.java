@@ -21,6 +21,10 @@ public class Savings {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    public Savings(UUID id) {
+        this.setId(id);
+    }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -61,7 +65,7 @@ public class Savings {
         this.active = active;
     }
 
-    public Savings() {
+    Savings() {
 
     }
 

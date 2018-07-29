@@ -1,8 +1,13 @@
 package com.nanda.banking.core.savings;
 
+import com.nanda.banking.core.channel.Channel;
+import com.nanda.banking.core.channel.ChannelServiceImpl;
+import com.nanda.banking.core.channelLog.ChannelLog;
+import com.nanda.banking.core.channelLog.ChannelLogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -11,6 +16,12 @@ import java.util.UUID;
 public class SavingsServiceImpl implements SavingsService {
     @Autowired
     private SavingsRepository savingsRepository;
+
+    @Autowired
+    private ChannelServiceImpl channelService;
+
+    @Autowired
+    private ChannelLogServiceImpl channelLogService;
 
     @Override
     public List<Savings> findAll() {
@@ -34,6 +45,22 @@ public class SavingsServiceImpl implements SavingsService {
 
     @Override
     public void save(List<Savings> savings) {
-        savingsRepository.saveAll(savings);
+        List<Savings> submittedSavings = savingsRepository.saveAll(savings);
+
+        List<Channel> channels = channelService.findAutoAssignChannel(true);
+
+        submittedSavings.forEach(
+                savingsItem ->{
+                    List<ChannelLog> channelLogs = new ArrayList<>();
+                    channels.forEach(
+                            channelItem->{
+                                ChannelLog channelLog = new ChannelLog(savingsItem, channelItem);
+                                channelLogs.add(channelLog);
+                            }
+                    );
+
+                    channelLogService.save(channelLogs);
+                }
+        );
     }
 }

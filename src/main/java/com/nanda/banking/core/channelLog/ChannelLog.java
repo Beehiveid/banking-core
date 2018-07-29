@@ -1,6 +1,8 @@
 package com.nanda.banking.core.channelLog;
 
 import com.nanda.banking.core.channel.Channel;
+import com.nanda.banking.core.common.Common;
+import com.nanda.banking.core.savings.Savings;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -21,6 +23,18 @@ public class ChannelLog {
     @JoinColumn(name = "channel_id")
     private Channel channel;
 
+    @ManyToOne
+    @JoinColumn(name = "savings_id")
+    private Savings savings;
+
+    Savings getSavings() {
+        return savings;
+    }
+
+    private void setSavings(Savings savings) {
+        this.savings = savings;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -33,7 +47,7 @@ public class ChannelLog {
         return identifier;
     }
 
-    public void setIdentifier(long identifier) {
+    private void setIdentifier(long identifier) {
         this.identifier = identifier;
     }
 
@@ -41,19 +55,33 @@ public class ChannelLog {
         return pinCode;
     }
 
-    public void setPinCode(String pinCode) {
+    private void setPinCode(String pinCode) {
         this.pinCode = pinCode;
     }
 
-    public Channel getChannel() {
+    Channel getChannel() {
         return channel;
     }
 
-    public void setChannel(Channel channel) {
+    private void setChannel(Channel channel) {
         this.channel = channel;
     }
 
-    public ChannelLog() {
+    ChannelLog() {
 
+    }
+
+    public ChannelLog(Savings savings, Channel channel){
+        this.setSavings(savings);
+        this.setId(UUID.randomUUID());
+        this.setChannel(channel);
+
+        if (channel.isSecure()){
+            this.setPinCode("abcde12345");
+        }else{
+            this.setPinCode(null);
+        }
+
+        this.setIdentifier(Common.getGeneratedLong());
     }
 }
